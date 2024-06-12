@@ -1,5 +1,8 @@
 package com.kotlin.playground.basics
 
+import com.kotlin.playground.functions.courseName
+import com.kotlin.playground.functions.topLevelFunction
+
 fun main() {
 
     // val
@@ -14,4 +17,9 @@ fun main() {
     println(age)
     age = 36
     println(age)
+
+    val num = topLevelFunction()
+    println("Num is $num")
+
+    println(courseName)
 }
