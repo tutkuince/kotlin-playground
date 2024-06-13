@@ -15,7 +15,7 @@ interface Repository {
     fun getAll(): Any
 }
 
-// Multiple Inheritance 
+// Multiple Inheritance
 class SqlCourseRepository : CourseRepository, Repository {
     override fun getById(id: Int): Course {
         return Course(
@@ -45,6 +45,26 @@ class NoSqlCourseRepository : CourseRepository {
     }
 }
 
+interface A {
+    fun doSomething() {
+        println("doSomething in A")
+    }
+}
+
+interface B {
+    fun doSomething() {
+        println("doSomething in B")
+    }
+}
+
+class AB: A, B {
+    override fun doSomething() {
+        super<A>.doSomething()
+        super<B>.doSomething()
+        println("doSomething in AB")
+    }
+}
+
 fun main() {
     val repo: SqlCourseRepository = SqlCourseRepository()
     val course = repo.getById(1)
@@ -58,4 +78,7 @@ fun main() {
     println("Course is $course2")
     val courseId2: Int = repo.save(Course(2, "Spring Data JPA with MongoDB", "Tutku"))
     println("Saved CourseId is $courseId2")
+
+    val ab: AB = AB()
+    ab.doSomething()
 }
