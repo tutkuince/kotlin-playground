@@ -3,13 +3,14 @@ package com.kotlin.playground.classes
 class Item() {
     var name: String = ""
 
+    // Recommended approach for constructors
+    // Use Primary Constructors whenever possible
+    // Use default values for overloaded constructor scenario
     constructor(_name: String): this() {
         name = _name
     }
 }
-// Recommended approach for constructors
-// Use Primary Constructors whenever possible
-// Use default values for overloaded constructor scenario
+
 fun main() {
     val item = Item("Iphone")
     println("Item name is ${item.name}")
