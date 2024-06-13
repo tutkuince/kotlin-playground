@@ -3,9 +3,10 @@ package com.kotlin.playground.classes.interfaces
 import com.kotlin.playground.classes.Course
 
 interface CourseRepository {
+    val isCoursePersisted: Boolean
     fun getById(id: Int): Course
 
-    fun save(course: Course) : Int {
+    fun save(course: Course): Int {
         println("Course: $course")
         return course.id
     }
@@ -17,6 +18,8 @@ interface Repository {
 
 // Multiple Inheritance
 class SqlCourseRepository : CourseRepository, Repository {
+    override var isCoursePersisted: Boolean = false
+
     override fun getById(id: Int): Course {
         return Course(
             id,
@@ -25,12 +28,19 @@ class SqlCourseRepository : CourseRepository, Repository {
         )
     }
 
+    override fun save(course: Course): Int {
+        isCoursePersisted = true
+        return super.save(course)
+    }
+
     override fun getAll(): Any {
         return "List"
     }
 }
 
 class NoSqlCourseRepository : CourseRepository {
+    override var isCoursePersisted: Boolean = false
+
     override fun getById(id: Int): Course {
         return Course(
             id,
@@ -57,7 +67,7 @@ interface B {
     }
 }
 
-class AB: A, B {
+class AB : A, B {
     override fun doSomething() {
         super<A>.doSomething()
         super<B>.doSomething()
@@ -70,8 +80,8 @@ fun main() {
     val course = repo.getById(1)
     println("Course is $course")
     val courseId: Int = repo.save(Course(2, "Spring Data JPA with PostgreSQL", "Tutku"))
+    println("Is the Course persisted: ${repo.isCoursePersisted}")
     println("Saved CourseId is $courseId")
-
 
     val repo2: NoSqlCourseRepository = NoSqlCourseRepository()
     val course2 = repo2.getById(1)
