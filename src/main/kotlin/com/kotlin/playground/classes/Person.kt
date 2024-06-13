@@ -4,8 +4,10 @@ class Person(
     val name: String = "Name",
     val age: Int = 0
 ) {
-
-
+    var email: String = ""
+    constructor(_email: String, _name: String = "DefaultName", _age: Int = 0) : this(_name, _age) {
+        email = _email
+    }
 
     // Class in object oriented programming is fundamentally the blueprint for creating objects
     fun action() {
