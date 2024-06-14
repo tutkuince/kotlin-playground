@@ -51,8 +51,12 @@ fun saveMovie(movie: Movie): Movie {
     )
 }
 
+fun printName(name: String) {
+    println("Name is :$name")
+}
+
 fun castValue(any: Any) {
-    when(any){
+    when (any) {
         any as? Double -> println("Value is Double")
         any as? Int -> println("Value is Int")
     }
@@ -63,6 +67,11 @@ fun main() {
     /*if (nameNullable != null) {
         println("Value is $nameNullable.length")   // Value is null
     }*/
+
+    nameNullable?.run { // scope function
+        printName(this)
+    }
+
     println("Value is ${nameNullable?.length}")   // safe operator, ?
     val length = nameNullable?.length?.toLong() ?: 0        // elvis operator, :? -> if it is null, return default value
     println("Length is ${length}")
