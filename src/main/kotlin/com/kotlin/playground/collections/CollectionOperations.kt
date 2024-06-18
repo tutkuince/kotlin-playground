@@ -11,6 +11,8 @@ fun exploreFilter(courseList: MutableList<Course>, predicate: (Course) -> Boolea
         .forEach { println("Course: $it") }
 }
 
+// map
+// This operator is fundamentally used to transfer the elements from one form to other form
 fun exploreMap(courseList: MutableList<Course>) {
     val courses = courseList
         .map { "${it.category.name.uppercase()} - ${it.name.uppercase()}" }
