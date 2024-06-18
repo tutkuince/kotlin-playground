@@ -50,6 +50,18 @@ fun exploreHashMap() {
     println("Max By Or Null is $maxByOrNull")
 }
 
+fun collectionsNullability() {
+    var list: MutableList<String>? = null
+    list = mutableListOf()
+    list.add("Tutku")
+    list.forEach{
+        println("Value is $it")
+    }
+
+    val list1: List<String?> = listOf("Adam", null, "Alex")
+    list1.forEach { println("Value is: ${it?.length}") }
+}
+
 fun main() {
     val courseList = courseList()
     val devPredicate = { course: Course -> course.category == CourseCategory.DEVELOPMENT }
@@ -72,5 +84,6 @@ fun main() {
         .flatMap { outerList -> outerList.map { it.toDouble() } }
     println("FlatMapResult: $flatMapResult")    // [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]*/
 
-    exploreHashMap()
+    // exploreHashMap()
+    collectionsNullability()
 }
