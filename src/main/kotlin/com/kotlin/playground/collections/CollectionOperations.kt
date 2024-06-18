@@ -33,6 +33,23 @@ fun exploreFlatMap(courseList: MutableList<Course>, kafka: String): List<String>
     return kafkaCourses
 }
 
+fun exploreHashMap() {
+    val nameAgeMutableMap = mutableMapOf("Tutku" to 35, "Coco" to 6)
+    nameAgeMutableMap.forEach{
+        (k, v) ->
+        println("Key is $k and the value is $v")
+    }
+    val value = nameAgeMutableMap.getOrElse("Tutku") {"0"}
+    println("Value is $value")
+
+    val filteredMap = nameAgeMutableMap.filterKeys { it.length > 4 }
+        .map { it.key.uppercase() }
+    println("Filtered Map is $filteredMap")
+
+    val maxByOrNull = nameAgeMutableMap.maxByOrNull { it.value }
+    println("Max By Or Null is $maxByOrNull")
+}
+
 fun main() {
     val courseList = courseList()
     val devPredicate = { course: Course -> course.category == CourseCategory.DEVELOPMENT }
@@ -41,7 +58,7 @@ fun main() {
     println("---DESIGN-COURSES---")
     // exploreFilter(courseList, desPredicate)
     // exploreMap(courseList)
-    val kafkaCourses = exploreFlatMap(courseList, KAFKA)
+   /* val kafkaCourses = exploreFlatMap(courseList, KAFKA)
     println("Kafka Courses: $kafkaCourses")
 
     val list = listOf(listOf(1, 2, 3), listOf(4, 5, 6))
@@ -53,5 +70,7 @@ fun main() {
 
     val flatMapResult = list
         .flatMap { outerList -> outerList.map { it.toDouble() } }
-    println("FlatMapResult: $flatMapResult")    // [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]
+    println("FlatMapResult: $flatMapResult")    // [1.0, 2.0, 3.0, 4.0, 5.0, 6.0]*/
+
+    exploreHashMap()
 }
