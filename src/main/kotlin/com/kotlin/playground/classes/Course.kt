@@ -15,7 +15,7 @@ package com.kotlin.playground.classes
 data class Course(
     val id: Int,
     val name: String,
-    val author: String
+    var author: String
 ) {
 }
 

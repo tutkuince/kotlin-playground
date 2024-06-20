@@ -1,5 +1,8 @@
 package com.kotlin.playground.scope.functions
 
+import com.kotlin.playground.classes.Course
+
+
 /**
  * Scope Functions
  *
@@ -17,4 +20,54 @@ package com.kotlin.playground.scope.functions
  *      println("Completed")
  * }
  * Scope Function accepts the lambda
+ *
+ * Scope functions don't introduce any new technical capabilities, but they can make your code more concise and readable.
+ * Due to the many similarities between scope functions, choosing the right one for your use case can be tricky.
+ * The choice mainly depends on your intent and the consistency of use in your project.
+ *
+ * let      -> it (Object Reference)        -> Lambda result (Return Value)
+ * run      -> this (Object Reference)      -> Lambda result (Return Value)
+ * run      -> - (Object Reference)         -> Lambda result (Return Value)
+ * with     -> this (Object Reference)      -> Lambda result (Return Value)
+ * apply    -> this (Object Reference)      -> Context Object (Return Value)
+ * also     -> it (Object Reference)        -> Context Object (Return Value)
+ *
+ * Here is a short guide for choosing scope functions depending on the intended purpose:
+ *  - Executing a lambda on non-nullable objects: let
+ *  - Introducing an expression as a variable in local scope: let
+ *  - Object configuration: apply
+ *  - Object configuration and computing the result: run
+ *  - Running statements where an expression is required: non-extension run
+ *  - Additional effects: also
+ *  - Grouping function calls on an object: with
  * */
+
+fun main() {
+    // exploreApply()
+    exploreAlso()
+}
+
+fun exploreApply() {
+    val course = Course(
+        1,
+        "Design Thinking in Kotlin",
+        "Unknown"
+    ).apply {
+        this.author = "Tutku"
+    }
+    println("Course $course")
+}
+
+fun exploreAlso() {
+    val course = Course(
+        1,
+        "Design Thinking in Kotlin",
+        "Unknown"
+    ).apply {
+        this.author = "Tutku"
+    }.also {
+        // it.author = "Tutku"
+        println("Course is $it")
+    }
+    // println("Course $course")
+}
