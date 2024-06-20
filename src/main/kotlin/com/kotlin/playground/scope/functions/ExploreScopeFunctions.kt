@@ -44,7 +44,25 @@ import com.kotlin.playground.classes.Course
 
 fun main() {
     // exploreApply()
-    exploreAlso()
+    // exploreAlso()
+    exploreLet()
+}
+
+fun exploreLet() {
+    val numberList = mutableListOf(1, 2, 3, 4, 5)
+    val result = numberList.map { it * 2 }.filter { it > 5 }.let {
+        println(it)
+        it.sum()
+    }
+    println("Result is $result")
+
+    var name: String? = null
+    name = "Tutku"
+    val nameResult = name?.let {
+        println(it)
+        it.uppercase()
+    }
+    println(nameResult)
 }
 
 fun exploreApply() {
