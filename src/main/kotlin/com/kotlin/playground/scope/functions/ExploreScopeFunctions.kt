@@ -26,11 +26,19 @@ import com.kotlin.playground.classes.Course
  * The choice mainly depends on your intent and the consistency of use in your project.
  *
  * let      -> it (Object Reference)        -> Lambda result (Return Value)
+ *  - let can be used to invoke one or more functions on results of call chains.
  * run      -> this (Object Reference)      -> Lambda result (Return Value)
+ *  - run is useful when your lambda both initializes objects and computes the return value.
  * run      -> - (Object Reference)         -> Lambda result (Return Value)
+ *  - run is useful when your lambda both initializes objects and computes the return value.
  * with     -> this (Object Reference)      -> Lambda result (Return Value)
+ *  - We recommend using with for calling functions on the context object when you don't need to use the returned result.
  * apply    -> this (Object Reference)      -> Context Object (Return Value)
+ *  - As apply returns the context object itself, we recommend that you use it for code blocks that don't return a value and
+ *  that mainly operate on the members of the receiver object.
+ *  - The most common use case for apply is for object configuration.
  * also     -> it (Object Reference)        -> Context Object (Return Value)
+ *  - also is useful for performing some actions that take the context object as an argument.
  *
  * Here is a short guide for choosing scope functions depending on the intended purpose:
  *  - Executing a lambda on non-nullable objects: let
@@ -45,7 +53,38 @@ import com.kotlin.playground.classes.Course
 fun main() {
     // exploreApply()
     // exploreAlso()
-    exploreLet()
+    // exploreLet()
+    // exploreWith()
+    exploreRun()
+}
+
+fun exploreRun() {
+    var numbers: MutableList<Int>? = null
+    val result = numbers.run {
+        numbers = mutableListOf(1, 2, 3)
+        numbers?.sum()
+    }
+    println("Run result is: $result")
+
+    val length = run {
+        var name = "Tutku"
+        println("Name is $name")
+        name.length
+    }
+    println("Run Length is $length")
+}
+
+fun exploreWith() {
+    val numberList = mutableListOf(1, 2, 3, 4, 5)
+    val result = with(numberList) {
+        /*println("Size is ${numberList.size}")
+        numberList.plus(6)
+        numberList.sum()*/
+        println("Size is $size")
+        val newList = plus(6)
+        newList.sum()
+    }
+    println("Result is $result")
 }
 
 fun exploreLet() {
